@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Name3D from "./Name3D";
 import InfoPills from "./InfoPills";
 import NavLinks from "./NavLinks";
 import TweetBox from "./TweetBox";
@@ -13,25 +14,30 @@ export default function Hero() {
   assert(RESUME_PATH.length > 0, "Resume path must not be empty");
 
   return (
-    <motion.section
-      className="flex flex-col items-center justify-center h-screen px-4 gap-6"
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-    >
-      <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-center">
-        Oluwaseyi Kareem
-      </h1>
+    <section className="flex flex-col items-center pt-24 md:pt-32 pb-10 px-4 gap-5">
+      <Name3D />
 
-      <InfoPills />
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.2, duration: 0.6, ease: "easeOut" }}
+      >
+        <InfoPills />
+      </motion.div>
 
-      <NavLinks />
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.4, duration: 0.6, ease: "easeOut" }}
+      >
+        <NavLinks />
+      </motion.div>
 
       <motion.div
         className="w-full max-w-lg"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 0.6, duration: 0.6 }}
+        transition={{ delay: 1.6, duration: 0.6 }}
       >
         <TweetBox />
       </motion.div>
@@ -39,10 +45,10 @@ export default function Hero() {
       <motion.a
         href={RESUME_PATH}
         download
-        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-300 dark:border-gray-700 text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-300 dark:border-gray-700 text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-800 hover:-translate-y-0.5 hover:shadow-md transition-all duration-200"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.0, duration: 0.6 }}
+        transition={{ delay: 1.8, duration: 0.6 }}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -60,6 +66,6 @@ export default function Hero() {
         </svg>
         Download Resume
       </motion.a>
-    </motion.section>
+    </section>
   );
 }
