@@ -9,46 +9,64 @@ import { assert } from "@/lib/assert";
 
 const RESUME_PATH = "/resume.pdf";
 
+// 1. Define high-end variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2, // Automatically offsets each child's animation
+      delayChildren: 0.5,   // Wait for Name3D to settle
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20, filter: "blur(10px)" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: {
+      type: "spring" as const,
+      damping: 25,
+      stiffness: 100,
+    },
+  },
+};
+
 export default function Hero() {
   assert(typeof RESUME_PATH === "string", "Resume path must be a string");
-  assert(RESUME_PATH.length > 0, "Resume path must not be empty");
 
   return (
-    <section className="flex flex-col items-center pt-24 md:pt-32 pb-10 px-4 gap-5">
+    <motion.section 
+      className="flex flex-col items-center pt-10 md:pt-14 pb-4 px-4 gap-3"
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+    >
+      {/* 2. Wrap Name3D or keep it separate if it handles its own internal 3D logic */}
       <Name3D />
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.2, duration: 0.6, ease: "easeOut" }}
-      >
+      <motion.div variants={itemVariants}>
         <InfoPills />
       </motion.div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.4, duration: 0.6, ease: "easeOut" }}
-      >
+      <motion.div variants={itemVariants}>
         <NavLinks />
       </motion.div>
 
-      <motion.div
-        className="w-full max-w-lg"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.6, duration: 0.6 }}
-      >
+      <motion.div className="w-full max-w-lg" variants={itemVariants}>
         <TweetBox />
       </motion.div>
 
       <motion.a
         href={RESUME_PATH}
         download
-        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-300 dark:border-gray-700 text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-800 hover:-translate-y-0.5 hover:shadow-md transition-all duration-200"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.8, duration: 0.6 }}
+        variants={itemVariants}
+        whileHover={{ scale: 1.05, y: -2 }}
+        whileTap={{ scale: 0.95 }}
+        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-300 dark:border-gray-700 text-sm font-medium bg-white/50 dark:bg-black/20 backdrop-blur-sm hover:shadow-lg transition-shadow duration-300"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -66,6 +84,6 @@ export default function Hero() {
         </svg>
         Download Resume
       </motion.a>
-    </section>
+    </motion.section>
   );
 }

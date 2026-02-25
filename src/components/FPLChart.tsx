@@ -129,33 +129,12 @@ export default function FPLChart({
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
           <div className="flex items-center gap-2.5">
-            {/* Soccer ball icon */}
-            <svg
-              className="w-5 h-5 text-gray-400 dark:text-gray-500 shrink-0"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <circle
-                cx="12"
-                cy="12"
-                r="10"
-                stroke="currentColor"
-                strokeWidth="1.5"
-              />
-              <polygon
-                points="12,7 16.8,10.5 14.9,16 9.1,16 7.2,10.5"
-                stroke="currentColor"
-                strokeWidth="1"
-                fill="currentColor"
-                opacity="0.12"
-              />
-              <line x1="12" y1="7" x2="12" y2="2" stroke="currentColor" strokeWidth="1" />
-              <line x1="16.8" y1="10.5" x2="21.5" y2="8.9" stroke="currentColor" strokeWidth="1" />
-              <line x1="14.9" y1="16" x2="17.9" y2="20.1" stroke="currentColor" strokeWidth="1" />
-              <line x1="9.1" y1="16" x2="6.1" y2="20.1" stroke="currentColor" strokeWidth="1" />
-              <line x1="7.2" y1="10.5" x2="2.5" y2="8.9" stroke="currentColor" strokeWidth="1" />
-            </svg>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/soccer_ball.png"
+              alt="Soccer ball"
+              className="w-5 h-5 shrink-0"
+            />
             <div>
               <h2 className="text-lg font-semibold tracking-tight">
                 FPL 2025 Bot Performance
@@ -287,26 +266,13 @@ export default function FPLChart({
             viewport={{ once: true }}
             transition={{ delay: 1.8, duration: 0.5 }}
           >
-            <g transform={`translate(${latestX}, ${latestY})`}>
-              <circle
-                r="8"
-                fill="var(--background)"
-                stroke={INDIGO}
-                strokeWidth="1.5"
-              />
-              <polygon
-                points="0,-4 3.8,-1.2 2.4,3.2 -2.4,3.2 -3.8,-1.2"
-                fill={INDIGO}
-                opacity="0.15"
-                stroke={INDIGO}
-                strokeWidth="0.6"
-              />
-              <line x1="0" y1="-4" x2="0" y2="-8" stroke={INDIGO} strokeWidth="0.6" />
-              <line x1="3.8" y1="-1.2" x2="7.6" y2="-2.5" stroke={INDIGO} strokeWidth="0.6" />
-              <line x1="2.4" y1="3.2" x2="4.7" y2="6.5" stroke={INDIGO} strokeWidth="0.6" />
-              <line x1="-2.4" y1="3.2" x2="-4.7" y2="6.5" stroke={INDIGO} strokeWidth="0.6" />
-              <line x1="-3.8" y1="-1.2" x2="-7.6" y2="-2.5" stroke={INDIGO} strokeWidth="0.6" />
-            </g>
+            <image
+              href="/soccer_ball.png"
+              x={latestX - 10}
+              y={latestY - 10}
+              width="20"
+              height="20"
+            />
           </motion.g>
         </svg>
 
@@ -317,14 +283,6 @@ export default function FPLChart({
               <span className="text-gray-500 dark:text-gray-400">Total</span>
               <span className="ml-1.5 font-semibold">
                 {totalPoints.toLocaleString()} pts
-              </span>
-            </div>
-            <div>
-              <span className="text-gray-500 dark:text-gray-400">
-                Beat avg
-              </span>
-              <span className="ml-1.5 font-semibold">
-                {weeksBeatAvg}/{totalWeeks} weeks
               </span>
             </div>
           </div>

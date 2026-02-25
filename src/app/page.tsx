@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <main className="min-h-screen">
       <Hero />
-      <section className="px-4 pt-2 pb-20 flex justify-center">
+      <section className="px-4 pt-0 pb-12 flex justify-center">
         <div className="w-full max-w-2xl">
           <FPLChart data={fpl.weeks} totalPoints={fpl.totalPoints} />
         </div>
