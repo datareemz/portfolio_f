@@ -3,6 +3,8 @@ import Link from "next/link";
 import { PROJECTS, getProjectBySlug } from "@/data/projects";
 import type { Metadata } from "next";
 import FadeIn from "@/components/FadeIn";
+import FPLChart from "@/components/FPLChart";
+import { parseFPLData } from "@/lib/parseFPLData";
 import { assert } from "@/lib/assert";
 
 interface ProjectPageProps {
@@ -42,6 +44,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     notFound();
   }
 
+  const isFPL = slug === "fpl2025";
+  const fpl = isFPL ? parseFPLData() : null;
+
   return (
     <main className="max-w-3xl mx-auto px-4 py-16 min-h-screen">
       <Link
@@ -65,6 +70,16 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           {project.description}
         </p>
       </FadeIn>
+
+      {fpl && (
+        <div className="mt-10">
+          <FPLChart
+            data={fpl.weeks}
+            totalPoints={fpl.totalPoints}
+            showProjectLink={false}
+          />
+        </div>
+      )}
 
       {project.techStack.length > 0 && (
         <FadeIn delay={0.3}>

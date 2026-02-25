@@ -22,7 +22,7 @@ export default function NavLinks() {
         <Link
           key={item.href}
           href={item.href}
-          className="px-5 py-2 rounded-full border border-gray-300 dark:border-gray-700 text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+          className="px-5 py-2 rounded-full border border-gray-300 dark:border-gray-700 text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-800 hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 transition-all duration-200"
         >
           {item.label}
         </Link>

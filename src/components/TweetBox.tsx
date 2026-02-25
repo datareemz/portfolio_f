@@ -11,11 +11,11 @@ interface TweetItem {
 }
 
 const FALLBACK_TWEETS: TweetItem[] = [
-  { text: "I dont like AI but this was made with some help of AI", date: "" },
-  { text: "Every Soup is Cereal", date: "" },
-  { text: "I like Cats", date: "" },
-  { text: "My code works, I just dont know why", date: "" },
-  { text: "Tabs over spaces, fight me", date: "" },
+  { text: "I dont like AI but this was made with some help of AI", date: "Feb 2026" },
+  { text: "Every Soup is Cereal", date: "Jan 2026" },
+  { text: "I like Cats", date: "Dec 2025" },
+  { text: "My code works, I just dont know why", date: "Nov 2025" },
+  { text: "Tabs over spaces, fight me", date: "Oct 2025" },
 ];
 
 const MAX_TWEETS = 50;
@@ -27,29 +27,19 @@ export default function TweetBox() {
 
   useEffect(() => {
     let cancelled = false;
-
     async function load() {
       try {
         const res = await fetch("/api/tweets");
-        if (!res.ok) {
-          throw new Error("Failed to fetch tweets");
-        }
+        if (!res.ok) throw new Error("Failed to fetch tweets");
         const json = await res.json();
         const fetched: TweetItem[] = json.tweets ?? [];
-        if (!cancelled) {
-          setTweets(fetched.length > 0 ? fetched : FALLBACK_TWEETS);
-        }
+        if (!cancelled) setTweets(fetched.length > 0 ? fetched : FALLBACK_TWEETS);
       } catch {
-        if (!cancelled) {
-          setTweets(FALLBACK_TWEETS);
-        }
+        if (!cancelled) setTweets(FALLBACK_TWEETS);
       } finally {
-        if (!cancelled) {
-          setLoading(false);
-        }
+        if (!cancelled) setLoading(false);
       }
     }
-
     void load();
     return () => { cancelled = true; };
   }, []);
@@ -59,55 +49,63 @@ export default function TweetBox() {
   }, []);
 
   assert(FALLBACK_TWEETS.length > 0, "Must have fallback tweets");
-  assert(FALLBACK_TWEETS.length <= MAX_TWEETS, "Too many fallback tweets");
 
-  const currentDate = tweets[currentIndex]?.date ?? "";
-  const phrases = tweets.map((t) => t.text);
-
-  if (loading) {
-    return (
-      <div className="w-full max-w-lg mx-auto px-4 py-4 rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900">
-        <p className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-3">
-          Here are some of my hot take tweets:
-        </p>
-        <div className="h-12 flex items-center">
-          <span className="text-gray-400 dark:text-gray-500 text-sm">
-            Loading tweets...
-          </span>
-        </div>
-      </div>
-    );
-  }
+  const activeTweets = tweets.length > 0 ? tweets : FALLBACK_TWEETS;
+  const currentDate = activeTweets[currentIndex]?.date ?? "";
+  const phrases = activeTweets.map((t) => t.text);
 
   return (
-    <div className="w-full max-w-lg mx-auto px-4 py-4 rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900">
-      <div className="flex items-center justify-between mb-3">
-        <p className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
-          Here are some of my hot take tweets:
-        </p>
-        <AnimatePresence mode="wait">
-          {currentDate && (
-            <motion.span
-              key={currentDate}
-              className="text-xs text-gray-400 dark:text-gray-500"
-              initial={{ opacity: 0, y: -5 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 5 }}
-              transition={{ duration: 0.3 }}
-            >
-              {currentDate}
-            </motion.span>
+    <motion.div 
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      className="relative group w-full max-w-lg mx-auto"
+    >
+      {/* 1. The "Glow" Background Layer */}
+      <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl opacity-20 group-hover:opacity-40 transition duration-500 blur-md"></div>
+
+      {/* 2. The Main Glass Container */}
+      <div className="relative px-6 py-5 rounded-xl border border-white/20 dark:border-white/10 bg-white/40 dark:bg-black/40 backdrop-blur-xl shadow-2xl">
+        
+        <div className="flex items-center justify-between mb-4">
+          <p className="text-[10px] font-bold tracking-[0.1em] text-gray-600 dark:text-gray-400">
+            Here are some of my &quot;engaging&quot; tweets:
+          </p>
+          
+          <AnimatePresence mode="wait">
+            {currentDate && (
+              <motion.span
+                key={currentDate}
+                className="text-[10px] font-mono text-blue-500 dark:text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded"
+                initial={{ opacity: 0, x: 10 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -10 }}
+              >
+                {currentDate}
+              </motion.span>
+            )}
+          </AnimatePresence>
+        </div>
+
+        <div className="h-10 flex items-center text-sm md:text-base font-medium text-gray-800 dark:text-gray-100">
+          {loading ? (
+            <motion.div 
+              animate={{ opacity: [0.4, 1, 0.4] }} 
+              transition={{ repeat: Infinity, duration: 1.5 }}
+              className="w-full h-4 bg-gray-200 dark:bg-gray-800 rounded animate-pulse" 
+            />
+          ) : (
+            <Typewriter
+              phrases={phrases}
+              typingSpeed={50}
+              deletingSpeed={30}
+              onPhraseChange={handlePhraseChange}
+            />
           )}
-        </AnimatePresence>
+        </div>
+
+        {/* 3. Decorative "Scanning" line */}
+        <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-500/50 to-transparent"></div>
       </div>
-      <div className="h-6 flex items-center text-sm">
-        <Typewriter
-          phrases={phrases}
-          typingSpeed={60}
-          deletingSpeed={30}
-          onPhraseChange={handlePhraseChange}
-        />
-      </div>
-    </div>
+    </motion.div>
   );
 }

@@ -9,12 +9,16 @@
 :root {
   --background: #ffffff;
   --foreground: #111827;
+  --chart-grid: rgba(0, 0, 0, 0.07);
+  --chart-label: #9ca3af;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #030712;
     --foreground: #f3f4f6;
+    --chart-grid: rgba(255, 255, 255, 0.07);
+    --chart-label: #6b7280;
   }
 }
 
@@ -31,6 +35,8 @@ body {
   background-color: rgba(99, 102, 241, 0.3);
 }
 
+/* ── Blink cursor ── */
+
 @keyframes blink {
   0%, 50% { opacity: 1; }
   51%, 100% { opacity: 0; }
@@ -38,4 +44,51 @@ body {
 
 .animate-blink {
   animation: blink 1s step-end infinite;
+}
+
+/* ── 3D Text Effect ── */
+
+.name-3d-letter {
+  text-shadow:
+    0 1px 0 #a0a0b4,
+    0 2px 0 #9090a4,
+    0 3px 0 #808094,
+    0 4px 0 #707084,
+    0 5px 0 #606074,
+    0 6px 0 #505064,
+    0 6px 1px rgba(0, 0, 0, 0.1),
+    0 0 5px rgba(0, 0, 0, 0.05),
+    0 1px 3px rgba(0, 0, 0, 0.2),
+    0 3px 5px rgba(0, 0, 0, 0.15),
+    0 5px 10px rgba(0, 0, 0, 0.12),
+    0 10px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.15s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+  .name-3d-letter {
+    text-shadow:
+      0 1px 0 rgba(99, 102, 241, 0.4),
+      0 2px 0 rgba(99, 102, 241, 0.34),
+      0 3px 0 rgba(99, 102, 241, 0.28),
+      0 4px 0 rgba(99, 102, 241, 0.22),
+      0 5px 0 rgba(99, 102, 241, 0.16),
+      0 6px 0 rgba(99, 102, 241, 0.1),
+      0 6px 1px rgba(0, 0, 0, 0.4),
+      0 0 10px rgba(99, 102, 241, 0.08),
+      0 3px 10px rgba(0, 0, 0, 0.35),
+      0 5px 15px rgba(0, 0, 0, 0.25),
+      0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* ── Chart styles ── */
+
+.chart-grid-line {
+  stroke: var(--chart-grid);
+  stroke-width: 1;
+}
+
+.chart-label {
+  fill: var(--chart-label);
 }
