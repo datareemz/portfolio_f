@@ -239,6 +239,7 @@ export default function FPLChart({
             strokeWidth="1.5"
             strokeOpacity="0.6"
             strokeLinejoin="round"
+            pathLength="1"
             initial={{ pathLength: 0 }}
             whileInView={{ pathLength: 1 }}
             viewport={{ once: true }}
@@ -253,6 +254,7 @@ export default function FPLChart({
             strokeWidth="2.5"
             strokeLinejoin="round"
             strokeLinecap="round"
+            pathLength="1"
             initial={{ pathLength: 0 }}
             whileInView={{ pathLength: 1 }}
             viewport={{ once: true }}
