@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { assert } from "@/lib/assert";
 import Link from "next/link";
 
@@ -88,6 +89,9 @@ export default function FPLChart({
   assert(data.length > 1, "Need at least 2 weeks of data");
   assert(totalPoints > 0, "Total points must be positive");
 
+  const chartRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(chartRef, { once: true, margin: "-50px" });
+
   const totalWeeks = data.length;
   const weeksBeatAvg = data.filter((d) => d.myPoints > d.avgPoints).length;
   const latestWeek = data[data.length - 1];
@@ -120,9 +124,9 @@ export default function FPLChart({
 
   return (
     <motion.div
+      ref={chartRef}
       initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
       transition={{ duration: 0.7, ease: "easeOut" }}
     >
       <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white/50 dark:bg-white/[0.02] p-6 md:p-8">
@@ -160,6 +164,7 @@ export default function FPLChart({
         <svg
           viewBox={`0 0 ${CHART.width} ${CHART.height}`}
           className="w-full"
+          overflow="visible"
           role="img"
           aria-label={`FPL performance chart over ${totalWeeks} game weeks`}
         >
@@ -226,8 +231,7 @@ export default function FPLChart({
             d={areaPath}
             fill="url(#fplAreaGrad)"
             initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
+            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 1, delay: 1.2 }}
           />
 
@@ -239,10 +243,10 @@ export default function FPLChart({
             strokeWidth="1.5"
             strokeOpacity="0.6"
             strokeLinejoin="round"
+            strokeDasharray="0 1"
             pathLength="1"
             initial={{ pathLength: 0 }}
-            whileInView={{ pathLength: 1 }}
-            viewport={{ once: true }}
+            animate={isInView ? { pathLength: 1 } : { pathLength: 0 }}
             transition={{ duration: 1.5, ease: "easeOut", delay: 0.5 }}
           />
 
@@ -254,18 +258,17 @@ export default function FPLChart({
             strokeWidth="2.5"
             strokeLinejoin="round"
             strokeLinecap="round"
+            strokeDasharray="0 1"
             pathLength="1"
             initial={{ pathLength: 0 }}
-            whileInView={{ pathLength: 1 }}
-            viewport={{ once: true }}
+            animate={isInView ? { pathLength: 1 } : { pathLength: 0 }}
             transition={{ duration: 1.5, ease: "easeOut", delay: 0.3 }}
           />
 
           {/* Soccer ball marker at latest game week */}
           <motion.g
             initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
+            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ delay: 1.8, duration: 0.5 }}
           >
             <image
@@ -285,6 +288,14 @@ export default function FPLChart({
               <span className="text-gray-500 dark:text-gray-400">Total</span>
               <span className="ml-1.5 font-semibold">
                 {totalPoints.toLocaleString()} pts
+              </span>
+            </div>
+            <div>
+              <span className="text-gray-500 dark:text-gray-400">
+                Beat avg
+              </span>
+              <span className="ml-1.5 font-semibold">
+                {weeksBeatAvg}/{totalWeeks} weeks
               </span>
             </div>
           </div>
