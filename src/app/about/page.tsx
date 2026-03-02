@@ -42,6 +42,20 @@ export default function AboutPage() {
         </FadeIn>
 
         <FadeIn delay={0.4}>
+          <div className="max-w-2xl mx-auto mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold mb-4 text-center">
+              Current Role
+            </h2>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-center">
+              I currently work as a Data Engineer, building and maintaining
+              scalable data pipelines and infrastructure. My day-to-day involves
+              designing ETL workflows, optimizing data models, and ensuring
+              reliable data delivery across the organization.
+            </p>
+          </div>
+        </FadeIn>
+
+        <FadeIn delay={0.6}>
           <ImageGallery />
         </FadeIn>
       </div>
