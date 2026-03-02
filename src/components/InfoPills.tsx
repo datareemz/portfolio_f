@@ -56,7 +56,7 @@ const BRIEFCASE = (
 const PILLS: PillData[] = [
   { icon: GRADUATION_CAP, label: "Computer Science" },
   { icon: MAP_PIN, label: "Canada" },
-  { icon: BRIEFCASE, label: "Data Engineer" },
+  { icon: BRIEFCASE, label: "Data/ML Engineer" },
 ];
 
 export default function InfoPills() {

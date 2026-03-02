@@ -11,11 +11,12 @@ interface TweetItem {
 }
 
 const FALLBACK_TWEETS: TweetItem[] = [
-  { text: "I dont like AI but this was made with some help of AI", date: "Feb 2026" },
-  { text: "Every Soup is Cereal", date: "Jan 2026" },
-  { text: "I like Cats", date: "Dec 2025" },
-  { text: "My code works, I just dont know why", date: "Nov 2025" },
-  { text: "Tabs over spaces, fight me", date: "Oct 2025" },
+  { text: "Arsenal winning the league will be a sad day for football.", date: "Feb 2026" },
+  { text: "I dont like AI but this was made with some help of AI.", date: "Feb 2026" },
+  { text: "I pray everyday that my niece wont be a streamer.", date: "Jan 2026" },
+  { text: "I cried about Ter Stegen everyday and God heard my prayers.", date: "Dec 2025" },
+  { text: "The sooner we get rid of Ter Statue, the sooner my club will prosper.", date: "Nov 2025" },
+  { text: "Girls will cry over breakups but not when cutting onions???", date: "Oct 2025" },
 ];
 
 const MAX_TWEETS = 50;

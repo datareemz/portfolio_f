@@ -13,9 +13,6 @@ const PLACEHOLDER_IMAGES: ImageItem[] = [
   { id: 1, alt: "Photo 1" },
   { id: 2, alt: "Photo 2" },
   { id: 3, alt: "Photo 3" },
-  { id: 4, alt: "Photo 4" },
-  { id: 5, alt: "Photo 5" },
-  { id: 6, alt: "Photo 6" },
 ];
 
 const MAX_IMAGES = 12;

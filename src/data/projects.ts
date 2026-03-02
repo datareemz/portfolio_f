@@ -16,11 +16,11 @@ export const PROJECTS: Project[] = [
     title: "FPL2025",
     tagline: "Autonomous Fantasy Premier League Bot",
     description:
-      "Made a simple bot to help me set my Fantasy Premier League team on a set schedule" +
+      "Made a simple bot to help me set my Fantasy Premier League team on a set schedule " +
       "Uses PyCaret for predictive modeling (extra trees model) to evaluate players across multiple " +
-      "dimensions including ROI, points per game, and form analysis. Last seasons' aggregated data was used" +
-      "as training data and the model has been retrained every 5 gameweeks. " +
-      "Google Cloud via cloud run and scheduled via cloud scheduler, containerized using docker.",
+      "dimensions including ROI, points per game, and form analysis. Last seasons' aggregated data was used " +
+      "as training data and the model has been retrained every 5 gameweeks. The bot is deployed on " +
+      "Google Cloud, triggered via cloud run and scheduled via cloud scheduler. ",
     techStack: ["Python", "GCP", "PyCaret", "Docker", "Terraform"],
     githubUrl: "https://github.com/datareemz/FPL2025",
     status: "live",

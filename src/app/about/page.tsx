@@ -32,16 +32,31 @@ export default function AboutPage() {
         <FadeIn delay={0.2}>
           <div className="prose dark:prose-invert mx-auto mb-12 max-w-2xl text-gray-700 dark:text-gray-300 leading-relaxed text-center">
             <p>
-              I&apos;m Oluwaseyi Kareem — a Data Engineer based in Canada with
-              a Computer Science degree. I build data pipelines, ML-powered
-              tools, and the occasional side project that may or may not ship.
-              When I&apos;m not wrangling data, I&apos;m probably tweeting hot
-              takes or debating whether soup is cereal.
+              I&apos;m Oluwaseyi Kareem — a Data/ML Engineer based in Canada.
+              I enjoy working with/managing data or related infrastructure and trying out new
+              AI/data technologies or trends. When I am AFK I am usually playing/watching soccer
+              or learning about cars.
             </p>
           </div>
         </FadeIn>
 
         <FadeIn delay={0.4}>
+          <div className="max-w-2xl mx-auto mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold mb-4 text-center">
+              Current Role
+            </h2>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-center">
+              I currently work as an Intermediate Data Engineer for a sports, 
+              fan-data analytics company. I build and maintain scalable data pipelines 
+              and infrastructure. My day-to-day involves designing/optimizing ETL workflows, 
+              optimizing data models to meet changing client requests, ensuring 
+              reliable data delivery across different systems within the organization to 
+              enhance data accuracy for our clients
+            </p>
+          </div>
+        </FadeIn>
+
+        <FadeIn delay={0.6}>
           <ImageGallery />
         </FadeIn>
       </div>
