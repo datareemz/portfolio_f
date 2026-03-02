@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { PROJECTS, getProjectBySlug } from "@/data/projects";
+import { PROJECTS, getProjectBySlug, getNextLiveProject } from "@/data/projects";
 import type { Metadata } from "next";
 import FadeIn from "@/components/FadeIn";
 import FPLChart from "@/components/FPLChart";
@@ -46,15 +46,26 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
   const isFPL = slug === "fpl2025";
   const fpl = isFPL ? parseFPLData() : null;
+  const nextProject = getNextLiveProject(slug);
 
   return (
     <main className="max-w-3xl mx-auto px-4 py-16 min-h-screen">
-      <Link
-        href="/#projects"
-        className="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
-      >
-        &larr; Back to projects
-      </Link>
+      <div className="flex items-center justify-between">
+        <Link
+          href="/#projects"
+          className="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+        >
+          &larr; Back to projects
+        </Link>
+        {nextProject && (
+          <Link
+            href={`/projects/${nextProject.slug}`}
+            className="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+          >
+            Next project &rarr;
+          </Link>
+        )}
+      </div>
 
       <FadeIn>
         <h1 className="text-4xl md:text-5xl font-bold mt-8">

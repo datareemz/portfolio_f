@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <main className="min-h-screen">
-      <div className="max-w-4xl mx-auto px-4 py-16">
+      <div className="max-w-4xl mx-auto px-4 py-10">
         <Link
           href="/"
           className="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
@@ -21,16 +21,16 @@ export default function AboutPage() {
         </Link>
 
         <FadeIn>
-          <h1 className="text-4xl md:text-5xl font-bold mt-8 mb-4 text-center">
+          <h1 className="text-4xl md:text-5xl font-bold mt-6 mb-3 text-center">
             About Me
           </h1>
-          <p className="text-gray-500 dark:text-gray-400 text-center text-lg mb-12">
+          <p className="text-gray-500 dark:text-gray-400 text-center text-lg mb-6">
             A little bit about who I am.
           </p>
         </FadeIn>
 
         <FadeIn delay={0.2}>
-          <div className="prose dark:prose-invert mx-auto mb-12 max-w-2xl text-gray-700 dark:text-gray-300 leading-relaxed text-center">
+          <div className="prose dark:prose-invert mx-auto mb-6 max-w-2xl text-gray-700 dark:text-gray-300 leading-relaxed text-center">
             <p>
               I&apos;m Oluwaseyi Kareem — a Data/ML Engineer based in Canada.
               I enjoy working with/managing data or related infrastructure and trying out new
@@ -41,16 +41,16 @@ export default function AboutPage() {
         </FadeIn>
 
         <FadeIn delay={0.4}>
-          <div className="max-w-2xl mx-auto mb-12">
-            <h2 className="text-2xl md:text-3xl font-bold mb-4 text-center">
+          <div className="max-w-2xl mx-auto mb-6">
+            <h2 className="text-2xl md:text-3xl font-bold mb-3 text-center">
               Current Role
             </h2>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-center">
-              I currently work as an Intermediate Data Engineer for a sports, 
-              fan-data analytics company. I build and maintain scalable data pipelines 
-              and infrastructure. My day-to-day involves designing/optimizing ETL workflows, 
-              optimizing data models to meet changing client requests, ensuring 
-              reliable data delivery across different systems within the organization to 
+              I currently work as an Intermediate Data Engineer for a sports,
+              fan-data analytics company. I build and maintain scalable data pipelines
+              and infrastructure. My day-to-day involves designing/optimizing ETL workflows,
+              optimizing data models to meet changing client requests, ensuring
+              reliable data delivery across different systems within the organization to
               enhance data accuracy for our clients
             </p>
           </div>

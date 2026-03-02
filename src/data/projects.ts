@@ -53,3 +53,17 @@ export function getProjectBySlug(slug: string): Project | undefined {
 
   return PROJECTS.find((p) => p.slug === slug);
 }
+
+export function getNextLiveProject(slug: string): Project | null {
+  assert(typeof slug === "string", "slug must be a string");
+  assert(slug.length > 0, "slug must not be empty");
+
+  const liveProjects = PROJECTS.filter((p) => p.status === "live");
+  assert(liveProjects.length > 0, "Must have at least one live project");
+
+  const currentIndex = liveProjects.findIndex((p) => p.slug === slug);
+  if (currentIndex === -1) return null;
+
+  const nextIndex = (currentIndex + 1) % liveProjects.length;
+  return liveProjects[nextIndex];
+}

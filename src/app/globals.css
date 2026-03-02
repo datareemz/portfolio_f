@@ -8,6 +8,7 @@
 
 :root {
   --background: #ffffff;
+  --background-overlay: rgba(255, 255, 255, 0.92);
   --foreground: #111827;
   --chart-grid: rgba(0, 0, 0, 0.07);
   --chart-label: #9ca3af;
@@ -16,6 +17,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #030712;
+    --background-overlay: rgba(3, 7, 18, 0.82);
     --foreground: #f3f4f6;
     --chart-grid: rgba(255, 255, 255, 0.07);
     --chart-label: #6b7280;
@@ -24,10 +26,14 @@
 
 html {
   scroll-behavior: smooth;
+  background-image: url('/background_img/background_img.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 body {
-  background: var(--background);
+  background: var(--background-overlay);
   color: var(--foreground);
 }
 
