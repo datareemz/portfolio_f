@@ -7,8 +7,8 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { label: "Portfolio", href: "/portfolio" },
   { label: "About Me", href: "/about" },
+  { label: "Portfolio", href: "/portfolio" },
   { label: "Contact Me", href: "/contact" },
 ];
 
