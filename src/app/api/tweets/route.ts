@@ -12,14 +12,6 @@ interface TweetItem {
   date: string;
 }
 
-const FALLBACK_TWEETS: TweetItem[] = [
-  { text: "I dont like AI but this was made with some help of AI", date: "" },
-  { text: "Every Soup is Cereal", date: "" },
-  { text: "I like Cats", date: "" },
-  { text: "My code works, I just dont know why", date: "" },
-  { text: "Tabs over spaces, fight me", date: "" },
-];
-
 function stripUrls(text: string): string {
   assert(typeof text === "string", "text must be a string");
   assert(text.length > 0, "text must not be empty");
@@ -123,39 +115,21 @@ async function fetchTweets(
 export async function GET() {
   const token = process.env.TWITTER_BEARER_TOKEN;
 
+  const cacheHeaders = {
+    "Cache-Control": `public, s-maxage=${CACHE_MAX_AGE}`,
+  };
+
   if (!token || token === "your_twitter_bearer_token_here") {
-    return NextResponse.json(
-      { tweets: FALLBACK_TWEETS },
-      {
-        headers: {
-          "Cache-Control": `public, s-maxage=${CACHE_MAX_AGE}`,
-        },
-      }
-    );
+    return NextResponse.json({ tweets: [] }, { headers: cacheHeaders });
   }
 
   const userId = await fetchUserId(token);
 
   if (!userId) {
-    return NextResponse.json(
-      { tweets: FALLBACK_TWEETS },
-      {
-        headers: {
-          "Cache-Control": `public, s-maxage=${CACHE_MAX_AGE}`,
-        },
-      }
-    );
+    return NextResponse.json({ tweets: [] }, { headers: cacheHeaders });
   }
 
   const tweets = await fetchTweets(token, userId);
-  const result = tweets.length > 0 ? tweets : FALLBACK_TWEETS;
 
-  return NextResponse.json(
-    { tweets: result },
-    {
-      headers: {
-        "Cache-Control": `public, s-maxage=${CACHE_MAX_AGE}`,
-      },
-    }
-  );
+  return NextResponse.json({ tweets }, { headers: cacheHeaders });
 }
