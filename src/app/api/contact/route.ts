@@ -73,6 +73,7 @@ export async function POST(request: Request) {
   });
 
   if (notifyResult.error) {
+    console.error("Resend error:", notifyResult.error);
     return NextResponse.json(
       { error: "Failed to send email" },
       { status: 500 },
