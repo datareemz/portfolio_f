@@ -66,7 +66,7 @@ export async function POST(request: Request) {
 
   // Send notification to you
   const notifyResult = await resend.emails.send({
-    from: "Portfolio Contact <noreply@kareemseyi.dev>",
+    from: "Portfolio Contact <noreply@portfolio.kareemseyi.dev>",
     to: RECIPIENT,
     subject: `New message from ${name}`,
     text: `Name: ${name}\nEmail: ${email}\n\n${message}`,

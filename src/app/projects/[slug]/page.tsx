@@ -52,7 +52,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     <main className="max-w-3xl mx-auto px-4 py-16 min-h-screen">
       <div className="flex items-center justify-between">
         <Link
-          href="/#projects"
+          href="/portfolio"
           className="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
         >
           &larr; Back to projects

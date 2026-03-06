@@ -17,12 +17,20 @@ export default function PortfolioPage() {
   return (
     <main className="min-h-screen">
       <div className="max-w-4xl mx-auto px-4 py-16">
-        <Link
-          href="/"
-          className="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
-        >
-          &larr; Back home
-        </Link>
+        <div className="flex items-center justify-between">
+          <Link
+            href="/"
+            className="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+          >
+            &larr; Back home
+          </Link>
+          <Link
+            href="/contact"
+            className="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+          >
+            Get in Touch &rarr;
+          </Link>
+        </div>
 
         <h1 className="text-4xl md:text-5xl font-bold mt-8 mb-12 text-center">
           Portfolio

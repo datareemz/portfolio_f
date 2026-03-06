@@ -16,7 +16,7 @@ export const PROJECTS: Project[] = [
     title: "FPL2025",
     tagline: "Autonomous Fantasy Premier League Bot",
     description:
-      "Made a simple bot to help me set my Fantasy Premier League team on a set schedule " +
+      "Made a simple bot to help me set my Fantasy Premier League team on a pre-set schedule. " +
       "Uses PyCaret for predictive modeling (extra trees model) to evaluate players across multiple " +
       "dimensions including ROI, points per game, and form analysis. Last seasons' aggregated data was used " +
       "as training data and the model has been retrained every 5 gameweeks. The bot is deployed on " +
@@ -30,7 +30,7 @@ export const PROJECTS: Project[] = [
     title: "This Portfolio",
     tagline: "The site you are looking at right now :)",
     description:
-      "A minimalist design portfolio websit built with Next.js and " +
+      "A simple design portfolio websit built with Next.js and " +
       "Tailwind CSS",
     techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
     githubUrl: null,
@@ -64,6 +64,7 @@ export function getNextLiveProject(slug: string): Project | null {
   const currentIndex = liveProjects.findIndex((p) => p.slug === slug);
   if (currentIndex === -1) return null;
 
-  const nextIndex = (currentIndex + 1) % liveProjects.length;
+  const nextIndex = currentIndex + 1;
+  if (nextIndex >= liveProjects.length) return null;
   return liveProjects[nextIndex];
 }
