@@ -64,6 +64,7 @@ export function getNextLiveProject(slug: string): Project | null {
   const currentIndex = liveProjects.findIndex((p) => p.slug === slug);
   if (currentIndex === -1) return null;
 
-  const nextIndex = (currentIndex + 1) % liveProjects.length;
+  const nextIndex = currentIndex + 1;
+  if (nextIndex >= liveProjects.length) return null;
   return liveProjects[nextIndex];
 }
